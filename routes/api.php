@@ -20,6 +20,7 @@ Route::post('/login', [AuthenticatedController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function() {
     Route::post('/submit-bonus', [BonusPembayaranController::class, 'store']);
     Route::get('/getAll', [BonusPembayaranController::class, 'getAll']);
+    Route::put('/update/{id}', [BonusPembayaranController::class,'update']);
     Route::get('/getBy/{id}', [BonusPembayaranController::class, 'show']);
     Route::delete('/delete/{id}', [BonusPembayaranController::class, 'destroy']);
 });

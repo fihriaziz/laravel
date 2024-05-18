@@ -51,14 +51,37 @@ class BonusPembayaranController extends Controller
         ], 200);
     }
 
-    public function destroy($id) {
-        $bonus = Bonus::find($id);
+    public function update(Request $request, $id) {
+        $bonus = Bonus::findOrFail($id);
+
         if(!$bonus) {
             return response()->json([
                 'message' => 'data not found'
             ], 404);
         }
 
+        $bonus->update([
+            'pembayaran' => $request->pembayaran,
+            'presentasiA' => $request->presentasiA,
+            'presentasiB' => $request->presentasiB,
+            'presentasiC' => $request->presentasiC,
+        ]);
+
+        return response()->json([
+            'message' => 'updated success',
+            'data' => $bonus
+        ], 201);
+    }
+
+    public function destroy($id) {
+        $bonus = Bonus::findOrFail($id);
+        if(!$bonus) {
+            return response()->json([
+                'message' => 'data not found'
+            ], 404);
+        }
+
+        $bonus->delete();
         return response()->json([
             'message' => 'success',
             'data' => $bonus
