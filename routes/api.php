@@ -24,3 +24,5 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/getBy/{id}', [BonusPembayaranController::class, 'show']);
     Route::delete('/delete/{id}', [BonusPembayaranController::class, 'destroy']);
 });
+
+Route::get('/getGeocode', [BonusPembayaranController::class, 'getGeocode']);

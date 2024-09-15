@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bonus;
+use Ballen\Distical\Calculator as DistanceCalculator;
+use Ballen\Distical\Entities\LatLong;
 use Illuminate\Http\Request;
 
 class BonusPembayaranController extends Controller
@@ -86,5 +88,15 @@ class BonusPembayaranController extends Controller
             'message' => 'success',
             'data' => $bonus
         ], 200);
+    }
+
+    public function calculator() {
+        $ipswich = new LatLong('52.5083', '4.7519');
+        $london = new LatLong('51.509865', '-0.118092');
+
+        $getDistanceCalculator = new DistanceCalculator($ipswich, $london);
+        $distance = $getDistanceCalculator->get();
+
+        echo "Distance: " . $distance . " km";
     }
 }
